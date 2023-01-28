@@ -11,6 +11,13 @@ const PORT = process.env.PORT || 5000;
 
 connectDb();
 
+app.use(express.json());
+
+
+//User routes
+app.use('/users', require('./routes/userRoutes'));
+
+
 mongoose.connection.once('open', () => {
     console.log("MongoDB connected");
     app.listen(PORT, () => {
