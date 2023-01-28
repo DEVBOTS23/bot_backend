@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDb = require("./config/mongoDb");
 const mongoose = require('mongoose');
+const { logEvents } = require("./middleware/logger");
 require('dotenv').config()
 
 const app = express();
@@ -19,5 +20,5 @@ mongoose.connection.once('open', () => {
 
 mongoose.connection.on('error', (error)=>{
     console.log(error);
-    // logEvents(`${error.no}: ${error.code}\t${error.syscall}\t${error.hostname}`, 'mongoDBErrors.log');
+    logEvents(`${error.no}: ${error.code}\t${error.syscall}\t${error.hostname}`, 'mongoDBErrors.log');
 })
